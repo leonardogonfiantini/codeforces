@@ -11,9 +11,7 @@ func main() {
 	var n, m, a float64
 	fmt.Scan(&n, &m, &a)
 
-	sol := (n*m) / (a*a)
-	if sol - float64(math.Round(sol)) > 0 { sol+=2 }
-
+	sol := math.Ceil(m/a) * math.Ceil(n/a)
 
 	fmt.Println(int(sol))
 
