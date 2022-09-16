@@ -2,6 +2,10 @@ package main
 
 import (
 	"fmt"
+	"strconv"
+	"bufio"
+	"io"
+	"os"
 )
 
 func main() {
@@ -9,18 +13,23 @@ func main() {
 	var n int
 	fmt.Scan(&n)
 
-	dbmap := make(map[string]int)
+	r := bufio.NewReader(os.Stdin)
+	w := bufio.NewWriter(os.Stdout)
+	defer w.Flush()
+
+	db := make(map[string]int)
 	for i := 0; i < n; i++ {
 		var name string
-		fmt.Scan(&name)
+		fmt.Fscan(r, &name)
 
-		if dbmap[name] > 0 {
-			fmt.Printf("%s%d\n", name, dbmap[name])
+		if db[name] == 0 {
+			io.WriteString(w, "OK\n")
+			db[name] = 1
 		} else {
-			fmt.Println("OK")
+			io.WriteString(w, name+strconv.Itoa(db[name])+"\n")
+			db[name] += 1
 		}
 
-		dbmap[name] += 1
 
 	}
 
