@@ -9,6 +9,28 @@ import (
 	"sort"
 )
 
+func binarySearch(arr []int, start int, end int, coin int) int {
+
+	if start > end {
+		return 0
+	}
+
+	middle := (end + start) / 2
+
+	if (arr[middle] <= coin && arr[middle+1] > coin) || arr[middle] == coin {
+		return middle+1
+	} else {
+
+		if arr[middle] > coin {
+			return binarySearch(arr, start, middle-1, coin)
+		} else {
+			return binarySearch(arr, middle+1, end, coin)
+		}
+
+	}
+
+}
+
 func main() {
 	var n int
 	fmt.Scan(&n)
@@ -35,14 +57,12 @@ func main() {
 		var coin int
 		fmt.Fscan(r, &coin)
 		
-		for j := n/2; j < n; j++ {
-			if shops[j] > coin {
-				j = j / 2
-			}
-		}
+		count := binarySearch(shops, 0, n-1, coin)
+
+		io.WriteString(w, strconv.Itoa(count)+"\n")
 			
 	}
 
-//completare
 
+	//completare
 }
