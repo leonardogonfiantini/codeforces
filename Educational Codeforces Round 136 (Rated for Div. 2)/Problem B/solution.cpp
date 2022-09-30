@@ -21,10 +21,10 @@ void solve() {
 
         for (int j = 1; j < n; j++) {
 
-            int val1 = arr[j] + corr[j-1];
-            int val2 = corr[j-1] - arr[j];
+            int val1 = abs(arr[j] + corr[j-1]);
+            int val2 = abs(corr[j-1] - arr[j]);
 
-            if ((val1 - corr[j-1]) == arr[j] && (corr[j-1] - val2) == arr[j]) {
+            if (abs(val1 - corr[j-1]) == abs(corr[j-1] - val2) && val2 != val1) {
                 cout << "-1" << endl;
                 f = 1;
                 break;
